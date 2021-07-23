@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="menu icon">
+    <mat-icon fontSet="fa" fontIcon="fa-bars"></mat-icon>
+  </button>
+  <span>Let's Cook</span>
+  <span class="spacer"></span>
+  <button mat-icon-button aria-label="heart icon">
+    <mat-icon fontSet="fa" fontIcon="fa-heart"></mat-icon>
+  </button>
+  <button mat-icon-button aria-label="share icon">
+    <mat-icon fontSet="fa" fontIcon="fa-share"></mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="recipes"
+     *ngIf="recipes$ | async as recipes">
+  <mat-card class="recipe"
+            *ngFor="let recipe of recipes">
+    <mat-card-header>
+      <mat-card-title>{{ recipe.title | maxText: 23 }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="recipe.image" [alt]="recipe.title">
+    <mat-card-content>
+      <p>
+        Make an {{ recipe.title }}.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
