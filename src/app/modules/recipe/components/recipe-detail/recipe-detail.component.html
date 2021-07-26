@@ -1,3 +1,13 @@
-<p>
-  recipe-detail works!
-</p>
+<main>
+  <div class="recipe" *ngIf="recipe$ | async as recipe">
+    <h3 class="recipe-title">{{ recipe.title }}</h3>
+    <div class="recipe-header">
+      <img class="recipe-image" [src]="recipe.image" [alt]="recipe.title" />
+      <p class="recipe-summary" [innerHTML]="recipe.summary"></p>
+    </div>
+    <div class="recipe-main"></div>
+    <div class="recipe-footer" matRipple>
+      <mat-icon fontSet="fa" fontIcon="fa-sort-down"></mat-icon>
+    </div>
+  </div>
+</main>

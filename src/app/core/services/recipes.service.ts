@@ -12,6 +12,14 @@ export class RecipesService {
 
   constructor(private httpClient: HttpClient) { }
 
+  information(id: string | null): Observable<any> {
+    const method = 'information?';
+    const input = `includeNutrition=false`;
+
+    const url = `${environment.baseUrl}${this.serviceUrl}${id}/${method}${input}&${environment.apiKey}`;
+    return this.httpClient.get(url);
+  }
+
   findByIngredients(ingredient: string): Observable<any> {
     const method = 'findByIngredients?';
     const input = `ingredients=${ingredient}`;
