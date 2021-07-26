@@ -1,14 +1,15 @@
-<div class="recipes"
-     *ngIf="randomRecipes$ | async as randomRecipes">
-  <mat-card class="recipe"
-            *ngFor="let recipe of randomRecipes.recipes">
+<div class="recipes" *ngIf="randomRecipes$ | async as randomRecipes">
+  <mat-card
+    class="recipe"
+    *ngFor="let recipe of randomRecipes.recipes"
+    [routerLink]="['/recipe', recipe.id]"
+  >
     <mat-card-header>
       <mat-card-title>{{ recipe.title | maxText: 23 }}</mat-card-title>
     </mat-card-header>
-    <img mat-card-image [src]="recipe.image" [alt]="recipe.title">
+    <img mat-card-image [src]="recipe.image" [alt]="recipe.title" />
     <mat-card-content>
-      <p [innerHTML]="recipe.summary | maxText: 125">
-      </p>
+      <p [innerHTML]="recipe.summary | maxText: 125"></p>
     </mat-card-content>
   </mat-card>
 </div>
