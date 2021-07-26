@@ -1,25 +1,51 @@
 <main>
   <div class="ingredient">
     <div class="ingredient__header">
-      <form class="ingredient__search">
+      <form [formGroup]="formGroup" class="ingredient__search">
         <mat-form-field class="ingredient__field" appearance="fill">
           <mat-label>Type an ingredient</mat-label>
-          <input matInput placeholder="Ex. Cheese" />
+          <input
+            matInput
+            formControlName="queryName"
+            placeholder="Ex. Cheese"
+          />
         </mat-form-field>
       </form>
-      <button
-        mat-raised-button
-        color="primary"
-        class="ingredient__button"
-      >
+      <button mat-raised-button color="primary" class="ingredient__button">
         Search
       </button>
     </div>
-    <mat-list role="list">
-      <mat-list-item role="listitem">
-        Item 1
-        <mat-divider></mat-divider> 
-      </mat-list-item>
-    </mat-list>
+    <div *ngIf="ingredients$ | async as ingredients" class="ingredient__main">
+      <button mat-raised-button (click)="toggleImages()">
+        {{ showImages ? 'Hide' : 'Show'}} Images</button>
+      <mat-list role="list">
+        <mat-list-item
+          class="ingredient__item"
+          *ngFor="let ingredient of ingredients.results"
+          role="listitem"
+          mat-ripple
+        >
+          <img
+            *ngIf="showImages"
+            class="ingredient__image"
+            [src]="imageUrl(ingredient.image)"
+          />
+          {{ ingredient.name | titlecase }}
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+      <div class="ingredient_footer">
+        <button mat-button (click)="previous()">
+          <mat-icon fontSet="fa" fontIcon="fa-chevron-left"></mat-icon>
+        </button>
+        <span class="ingredient__pagination">
+          {{ currentPage }} /
+          {{ maxPagesByTotalItems(ingredients.totalResults) }}
+        </span>
+        <button mat-button (click)="next(ingredients.totalResults)">
+          <mat-icon fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </main>

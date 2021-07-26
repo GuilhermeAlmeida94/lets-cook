@@ -7,8 +7,8 @@ import { shareReplay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class RecipesService {
-  serviceUrl = 'recipes/';
+export class RecipeService {
+  private serviceUrl = 'recipes/';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
-import { RecipesService } from 'src/app/core/services/recipes.service';
+import { RecipeService } from 'src/app/core/services/recipe.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -15,7 +15,7 @@ export class RecipeDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipesService
+    private recipeService: RecipeService
   ) {}
 
   recipe$ = this.id$.pipe(

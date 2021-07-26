@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RecipesService } from 'src/app/core/services/recipes.service';
+import { RecipeService } from 'src/app/core/services/recipe.service';
 
 @Component({
   selector: 'app-recipe',
@@ -8,7 +8,7 @@ import { RecipesService } from 'src/app/core/services/recipes.service';
 })
 export class RecipeComponent {
 
-  randomRecipes$ = this.recepiesService.random(5);
+  randomRecipes$ = this.recepieService.random(5);
 
-  constructor(private recepiesService: RecipesService) { }
+  constructor(private recepieService: RecipeService) { }
 }
