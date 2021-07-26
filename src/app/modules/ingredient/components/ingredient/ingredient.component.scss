@@ -1,0 +1,38 @@
+main {
+  display: flex;
+  justify-content: space-around;
+}
+.ingredient {
+  width: 90%;
+  margin-top: 1em;
+  padding: 2em;
+  margin: 1em;
+  border-radius: 1em;
+  box-shadow: 1px 1px 5px 1px grey;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  &-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  &-search {
+    width: 100%;
+
+    &-field {
+      width: 100%;
+    }
+    &-button {
+      height: 75%;
+    }
+  }
+}

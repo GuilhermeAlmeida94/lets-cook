@@ -1,3 +1,25 @@
-<p>
-  ingredient works!
-</p>
+<main>
+  <div class="ingredient">
+    <div class="ingredient-header">
+      <form class="ingredient-search">
+        <mat-form-field class="ingredient-search-field" appearance="fill">
+          <mat-label>Type an ingredient</mat-label>
+          <input matInput placeholder="Ex. Cheese" />
+        </mat-form-field>
+      </form>
+      <button
+        mat-raised-button
+        color="primary"
+        class="ingredient-search-button"
+      >
+        Search
+      </button>
+    </div>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        Item 1
+        <mat-divider></mat-divider> 
+      </mat-list-item>
+    </mat-list>
+  </div>
+</main>
