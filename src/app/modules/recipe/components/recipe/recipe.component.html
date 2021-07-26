@@ -1,6 +1,6 @@
-<div class="recipes" *ngIf="randomRecipes$ | async as randomRecipes">
+<div class="recipe" *ngIf="randomRecipes$ | async as randomRecipes">
   <mat-card
-    class="recipe"
+    class="recipe__item"
     *ngFor="let recipe of randomRecipes.recipes"
     [routerLink]="['/recipe', recipe.id]"
   >

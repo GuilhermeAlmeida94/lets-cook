@@ -9,23 +9,23 @@ main {
   margin: 1em;
   border-radius: 1em;
   box-shadow: 1px 1px 5px 1px grey;
-  &-title {
+  &__title {
     text-align: center;
     margin-bottom: 1em;
   }
-  &-header {
+  &__header {
     display: flex;
     justify-content: space-around;
   }
-  &-image {
+  &__image {
     height: 50%;
     width: 50%;
   }
-  &-summary {
+  &__summary {
     margin-left: 2em;
     text-align: justify;
   }
-  &-footer {
+  &__footer {
     display: flex;
     justify-content: space-around;
     cursor: pointer;

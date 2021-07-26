@@ -1,11 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="toolbar" color="primary">
   <button mat-icon-button aria-label="menu icon">
     <mat-icon fontSet="fa" fontIcon="fa-bars"></mat-icon>
   </button>
   <span>Let's Cook</span>
-  <a mat-button class="router-link" routerLink="/recipe" routerLinkActive="active-link">Recipes</a>
-  <a mat-button class="router-link" routerLink="/ingredient" routerLinkActive="active-link">Ingredients</a>
-  <span class="spacer"></span>
+  <a mat-button class="toolbar__link" routerLink="/recipe" routerLinkActive="toolbar__link--active">Recipes</a>
+  <a mat-button class="toolbar__link" routerLink="/ingredient" routerLinkActive="toolbar__link--active">Ingredients</a>
+  <span class="toolbar__spacer"></span>
   <button mat-icon-button aria-label="heart icon">
     <mat-icon fontSet="fa" fontIcon="fa-heart"></mat-icon>
   </button>

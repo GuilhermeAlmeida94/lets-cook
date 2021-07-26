@@ -1,12 +1,16 @@
-.router-link {
-    padding: .5em;
-    margin: .3em;
-    border-radius: .3em;
+.toolbar {
+  &__link {
+    padding: 0.5em;
+    margin: 0.3em;
+    border-radius: 0.3em;
     cursor: pointer;
-}
-.active-link {
-    background-color: #7e5cbb;
-}
-.spacer {
+
+    &--active {
+      background-color: #7e5cbb;
+    }
+  }
+  
+  &__spacer {
     flex: 1 1 auto;
+  }
 }

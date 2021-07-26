@@ -1,12 +1,12 @@
 <main>
   <div class="recipe" *ngIf="recipe$ | async as recipe">
-    <h3 class="recipe-title">{{ recipe.title }}</h3>
-    <div class="recipe-header">
-      <img class="recipe-image" [src]="recipe.image" [alt]="recipe.title" />
-      <p class="recipe-summary" [innerHTML]="recipe.summary"></p>
+    <h3 class="recipe__title">{{ recipe.title }}</h3>
+    <div class="recipe__header">
+      <img class="recipe__image" [src]="recipe.image" [alt]="recipe.title" />
+      <p class="recipe__summary" [innerHTML]="recipe.summary"></p>
     </div>
-    <div class="recipe-main"></div>
-    <div class="recipe-footer" matRipple>
+    <div class="recipe__main"></div>
+    <div class="recipe__footer" matRipple>
       <mat-icon fontSet="fa" fontIcon="fa-sort-down"></mat-icon>
     </div>
   </div>

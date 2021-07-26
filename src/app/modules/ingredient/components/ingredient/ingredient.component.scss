@@ -13,26 +13,27 @@ main {
   justify-content: space-around;
   flex-direction: column;
 
-  &-header {
+  &__header {
     display: flex;
     justify-content: center;
     flex-direction: row;
   }
 
-  &-form {
+  &__form {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
   }
 
-  &-search {
+  &__search {
     width: 100%;
+  }
 
-    &-field {
-      width: 100%;
-    }
-    &-button {
-      height: 75%;
-    }
+  &__field {
+    width: 100%;
+  }
+  
+  &__button {
+    height: 75%;
   }
 }
