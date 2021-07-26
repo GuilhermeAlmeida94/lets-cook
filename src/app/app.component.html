@@ -12,18 +12,4 @@
   </button>
 </mat-toolbar>
 
-<div class="recipes"
-     *ngIf="recipes$ | async as recipes">
-  <mat-card class="recipe"
-            *ngFor="let recipe of recipes">
-    <mat-card-header>
-      <mat-card-title>{{ recipe.title | maxText: 23 }}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image [src]="recipe.image" [alt]="recipe.title">
-    <mat-card-content>
-      <p>
-        Make an {{ recipe.title }}.
-      </p>
-    </mat-card-content>
-  </mat-card>
-</div>
+<router-outlet></router-outlet>
