@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/recipe/recipe.module').then(m => m.RecipeModule),
   },
   {
+    path: 'ingredient',
+    loadChildren: () => import('./modules/ingredient/ingredient.module').then(m => m.IngredientModule),
+  },
+  {
     path: '**',
     redirectTo: 'recipe',
     pathMatch: 'full'

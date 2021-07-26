@@ -1,8 +1,10 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="menu icon">
+  <button mat-icon-button aria-label="menu icon">
     <mat-icon fontSet="fa" fontIcon="fa-bars"></mat-icon>
   </button>
   <span>Let's Cook</span>
+  <a mat-button class="router-link" routerLink="/recipe" routerLinkActive="active-link">Recipes</a>
+  <a mat-button class="router-link" routerLink="/ingredient" routerLinkActive="active-link">Ingredients</a>
   <span class="spacer"></span>
   <button mat-icon-button aria-label="heart icon">
     <mat-icon fontSet="fa" fontIcon="fa-heart"></mat-icon>
