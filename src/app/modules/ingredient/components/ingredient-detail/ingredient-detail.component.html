@@ -1,3 +1,26 @@
-<p>
-  ingredient-detail works!
-</p>
+<main>
+  <button
+    mat-mini-fab
+    class="back-button"
+    routerLink="/ingredient"
+    queryParamsHandling="preserve"
+  >
+    <mat-icon fontSet="fa" fontIcon="fa-arrow-left"></mat-icon>
+  </button>
+  <div class="ingredient" *ngIf="ingredient$ | async as ingredient">
+    <h3 class="ingredient__title">{{ ingredient.originalName | titlecase }}</h3>
+    <div class="ingredient__header">
+      <img [src]="imageUrl" [alt]="ingredient.originalName" />
+      <ul class="ingredient__summary">
+        <li><strong>Consistency</strong>: {{ ingredient.consistency }}</li>
+        <li>
+          <strong>Units</strong>: {{ ingredient.possibleUnits.join(",") }}
+        </li>
+      </ul>
+    </div>
+    <div class="ingredient__main"></div>
+    <div class="ingredient__footer" matRipple>
+      <mat-icon fontSet="fa" fontIcon="fa-sort-down"></mat-icon>
+    </div>
+  </div>
+</main>

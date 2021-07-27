@@ -1,15 +1,21 @@
-<div class="recipe" *ngIf="randomRecipes$ | async as randomRecipes">
-  <mat-card
-    class="recipe__item"
-    *ngFor="let recipe of randomRecipes.recipes"
-    [routerLink]="['/recipe', recipe.id]"
-  >
-    <mat-card-header>
-      <mat-card-title>{{ recipe.title | maxText: 23 }}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image [src]="recipe.image" [alt]="recipe.title" />
-    <mat-card-content>
-      <p [innerHTML]="recipe.summary | maxText: 125"></p>
-    </mat-card-content>
-  </mat-card>
+<div *ngIf="error$ | async as error" class="error">
+  {{ error.error.message }}
 </div>
+
+<main *ngIf="!(error$ | async)">
+  <div class="recipe" *ngIf="randomRecipes$ | async as randomRecipes">
+    <mat-card
+      class="recipe__item"
+      *ngFor="let recipe of randomRecipes.recipes"
+      [routerLink]="['/recipe', recipe.id]"
+    >
+      <mat-card-header>
+        <mat-card-title>{{ recipe.title | maxText: 23 }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="recipe.image" [alt]="recipe.title" />
+      <mat-card-content>
+        <p [innerHTML]="recipe.summary | maxText: 125"></p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</main>

@@ -11,6 +11,13 @@ export class IngredientService {
 
   constructor(private httpClient: HttpClient) { }
 
+  information(id: string | null): Observable<any> {
+    const method = 'information?';
+
+    const url = `${environment.baseUrl}${this.serviceUrl}${id}/${method}${environment.apiKey}`;
+    return this.httpClient.get(url);
+  }
+
   search(queryName: string, offset: number): Observable<any> {
     const method = 'search?';
     const query = `query=${queryName}&offset=${offset}`

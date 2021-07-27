@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { concatMap, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
 import { RecipeService } from 'src/app/core/services/recipe.service';
 
 @Component({
@@ -19,8 +19,7 @@ export class RecipeDetailComponent implements OnInit {
   ) {}
 
   recipe$ = this.id$.pipe(
-    concatMap((id) => this.recipeService.information(id)),
-    tap((recipe) => console.log(recipe))
+    concatMap((id) => this.recipeService.information(id))
   );
 
   ngOnInit() {

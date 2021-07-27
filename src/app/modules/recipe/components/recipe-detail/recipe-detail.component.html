@@ -1,4 +1,7 @@
 <main>
+  <button mat-mini-fab class="back-button">
+    <mat-icon fontSet="fa" fontIcon="fa-arrow-left"></mat-icon>
+  </button>
   <div class="recipe" *ngIf="recipe$ | async as recipe">
     <h3 class="recipe__title">{{ recipe.title }}</h3>
     <div class="recipe__header">

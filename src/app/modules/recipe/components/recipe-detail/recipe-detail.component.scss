@@ -1,12 +1,18 @@
+.back-button {
+  display: flex;
+  justify-content: center;
+  padding-top: .3em;
+}
+
 main {
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
+  padding: 1em 2em;
 }
 .recipe {
-  width: 90%;
+  width: 100%;
   margin-top: 1em;
-  padding: 2em;
-  margin: 1em;
   border-radius: 1em;
   box-shadow: 1px 1px 5px 1px grey;
   &__title {

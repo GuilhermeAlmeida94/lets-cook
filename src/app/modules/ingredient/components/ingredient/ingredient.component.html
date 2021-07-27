@@ -1,4 +1,8 @@
-<main>
+<div *ngIf="error$ | async as error" class="error">
+  {{ error.error.message }}
+</div>
+
+<main *ngIf="!(error$ | async)">
   <div class="ingredient">
     <div class="ingredient__header">
       <form [formGroup]="formGroup" class="ingredient__search">
@@ -11,22 +15,34 @@
           />
         </mat-form-field>
       </form>
-      <button mat-raised-button color="primary" class="ingredient__button">
+      <button
+        mat-raised-button
+        color="primary"
+        class="ingredient__button"
+        (click)="search()"
+      >
         Search
       </button>
     </div>
-    <div *ngIf="ingredients$ | async as ingredients" class="ingredient__main">
+    <div *ngIf="ingredients$ | async as ingredients" class="ingredient__list">
       <button mat-raised-button (click)="toggleImages()">
-        {{ showImages ? 'Hide' : 'Show'}} Images</button>
+        {{ showImage ? "Hide" : "Show" }} Images
+      </button>
       <mat-list role="list">
         <mat-list-item
           class="ingredient__item"
           *ngFor="let ingredient of ingredients.results"
           role="listitem"
           mat-ripple
+          [routerLink]="[
+            '/ingredient',
+            ingredient.id,
+            { imageName: ingredient.image }
+          ]"
+          [queryParams]="{ queryName: formGroup.get('queryName')?.value, currentPage, showImage }"
         >
           <img
-            *ngIf="showImages"
+            *ngIf="showImage"
             class="ingredient__image"
             [src]="imageUrl(ingredient.image)"
           />
@@ -34,7 +50,7 @@
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
-      <div class="ingredient_footer">
+      <div class="ingredient__footer">
         <button mat-button (click)="previous()">
           <mat-icon fontSet="fa" fontIcon="fa-chevron-left"></mat-icon>
         </button>
