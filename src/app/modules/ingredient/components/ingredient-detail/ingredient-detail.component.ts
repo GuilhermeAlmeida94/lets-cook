@@ -12,7 +12,8 @@ import { IngredientService } from 'src/app/core/services/ingredient.service';
 export class IngredientDetailComponent implements OnInit {
   private idSubject = new BehaviorSubject<string>('0');
   id$ = this.idSubject.asObservable();
-
+  
+  showImage = false;
   imageName = '';
 
   constructor(
@@ -30,6 +31,10 @@ export class IngredientDetailComponent implements OnInit {
     this.idSubject.next(id);
 
     this.imageName = this.route.snapshot.paramMap.get('imageName') as string;
+    
+    this.showImage = JSON.parse(
+      this.route.snapshot.queryParamMap?.get('showImage') ?? 'false'
+    );
   }
   
   get imageUrl(): string {

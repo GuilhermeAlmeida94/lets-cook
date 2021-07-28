@@ -12,8 +12,7 @@ import {
   catchError,
   concatMap,
   debounceTime,
-  startWith,
-  tap,
+  startWith
 } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
@@ -23,8 +22,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./ingredient.component.scss'],
 })
 export class IngredientComponent {
-  private offsetSubject = new BehaviorSubject<number>(0);
-  offset$ = this.offsetSubject.asObservable();
+  private currentPageSubject = new BehaviorSubject<number>(0);
+  currentPage$ = this.currentPageSubject.asObservable();
 
   private searchSubject = new BehaviorSubject<number>(0);
   search$ = this.searchSubject.asObservable();
@@ -62,13 +61,15 @@ export class IngredientComponent {
       this.formGroup.get('queryName')?.valueChanges as Observable<any>
     ).pipe(
       startWith(queryName),
-      debounceTime(1000),
-      tap((_) => (this.currentPage = 1))
+      debounceTime(1000)
     );
-    this.ingredients$ = combineLatest([queryName$, this.offset$]).pipe(
-      concatMap(([queryName, offset]) =>
-        queryName ? this.ingredientService.search(queryName, offset) : EMPTY
-      ),
+    this.ingredients$ = combineLatest([queryName$, this.currentPage$]).pipe(
+      concatMap(([queryName, currentPage]) => {
+        const offset = 10 * (currentPage - 1);
+        return queryName
+          ? this.ingredientService.search(queryName, offset)
+          : EMPTY;
+      }),
       catchError((error) => {
         console.log(error);
         this.errorSubject.next(error);
@@ -78,7 +79,7 @@ export class IngredientComponent {
 
     if (currentPage) {
       this.currentPage = currentPage;
-      this.offsetSubject.next(10 * (this.currentPage - 1));
+      this.currentPageSubject.next(this.currentPage);
     }
     if (queryName) {
       this.formGroup.get('queryName')?.setValue(queryName);
@@ -104,14 +105,14 @@ export class IngredientComponent {
   previous(): void {
     if (this.currentPage > 1) {
       this.currentPage -= 1;
-      this.offsetSubject.next(10 * (this.currentPage - 1));
+      this.currentPageSubject.next(this.currentPage);
     }
   }
 
   next(totalItems: number): void {
     if (this.currentPage < this.maxPagesByTotalItems(totalItems)) {
       this.currentPage += 1;
-      this.offsetSubject.next(10 * (this.currentPage - 1));
+      this.currentPageSubject.next(this.currentPage);
     }
   }
 

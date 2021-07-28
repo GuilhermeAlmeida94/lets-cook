@@ -10,7 +10,7 @@
   <div class="ingredient" *ngIf="ingredient$ | async as ingredient">
     <h3 class="ingredient__title">{{ ingredient.originalName | titlecase }}</h3>
     <div class="ingredient__header">
-      <img [src]="imageUrl" [alt]="ingredient.originalName" />
+      <img *ngIf="showImage" [src]="imageUrl" [alt]="ingredient.originalName" />
       <ul class="ingredient__summary">
         <li><strong>Consistency</strong>: {{ ingredient.consistency }}</li>
         <li>
