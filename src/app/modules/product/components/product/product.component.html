@@ -1,0 +1,77 @@
+<div *ngIf="error$ | async as error" class="error">
+  {{ error.error.message }}
+</div>
+
+<main *ngIf="!(error$ | async)">
+  <div class="product">
+    <div class="product__header">
+      <form [formGroup]="formGroup" class="product__search">
+        <mat-form-field class="product__field" appearance="fill">
+          <mat-label>Type an product</mat-label>
+          <input
+            matInput
+            formControlName="queryName"
+            placeholder="Ex. Snicker"
+          />
+        </mat-form-field>
+      </form>
+      <button
+        mat-raised-button
+        color="primary"
+        class="product__button"
+        (click)="search()"
+      >
+        Search
+      </button>
+    </div>
+    <div *ngIf="products$ | async as products" class="product__list">
+      <mat-list role="list">
+        <mat-list-item
+          class="product__item"
+          *ngFor="let product of products.products"
+          role="listitem"
+          mat-ripple
+          [routerLink]="['/product', product.id]"
+        >
+          <img [src]="product.image" />
+          {{ product.title | titlecase }}
+          <div class="product__buttons">
+            <button
+              mat-raised-button
+              [routerLink]="[
+                '/product/simple',
+                product.id
+              ]"
+              [queryParams]="{ queryName: formGroup.get('queryName')?.value, currentPage }"
+            >
+              Without Resolver
+            </button>
+            <button
+              mat-raised-button
+              [routerLink]="[
+                '/product',                
+                product.id
+              ]"
+              [queryParams]="{ queryName: formGroup.get('queryName')?.value, currentPage }"
+            >
+              With Resolver
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+      <div class="product__footer">
+        <button mat-button (click)="previous()">
+          <mat-icon fontSet="fa" fontIcon="fa-chevron-left"></mat-icon>
+        </button>
+        <span class="product__pagination">
+          {{ currentPage }} /
+          {{ maxPagesByTotalItems(products.totalProducts) }}
+        </span>
+        <button mat-button (click)="next(products.totalProducts)">
+          <mat-icon fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</main>

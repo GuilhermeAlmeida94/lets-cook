@@ -1,0 +1,26 @@
+<main>
+  <button
+    mat-mini-fab
+    class="back-button"
+    routerLink="/product"
+    queryParamsHandling="preserve"
+  >
+    <mat-icon fontSet="fa" fontIcon="fa-arrow-left"></mat-icon>
+  </button>
+  <div class="product" *ngIf="product$ | async as product">
+    <h3 class="product__title">{{ product.title | titlecase }}</h3>
+    <div class="product__header">
+      <img [src]="product.image" [alt]="product.title" />
+      <ul class="product__summary">
+        <li><strong>Description</strong>: {{ product.description }}</li>
+        <li>
+          <strong>Badges</strong>: {{ product.badges.join(", ") }}
+        </li>
+      </ul>
+    </div>
+    <div class="product__main"></div>
+    <div class="product__footer" matRipple>
+      <mat-icon fontSet="fa" fontIcon="fa-sort-down"></mat-icon>
+    </div>
+  </div>
+</main>

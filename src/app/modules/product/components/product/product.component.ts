@@ -7,16 +7,16 @@ import {
   Observable,
   Subject,
 } from 'rxjs';
-import { IngredientService } from 'src/app/core/services/ingredient.service';
+import { ProductService } from 'src/app/core/services/product.service';
 import { catchError, concatMap, debounceTime, startWith } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-ingredient',
-  templateUrl: './ingredient.component.html',
-  styleUrls: ['./ingredient.component.scss'],
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss'],
 })
-export class IngredientComponent {
+export class ProductComponent {
   private currentPageSubject = new BehaviorSubject<number>(0);
   currentPage$ = this.currentPageSubject.asObservable();
 
@@ -28,19 +28,15 @@ export class IngredientComponent {
 
   currentPage = 1;
   private itemsPerPage = 10;
-  showImage = false;
   formGroup: FormGroup;
 
-  ingredients$: Observable<any> | undefined;
+  products$: Observable<any> | undefined;
 
   constructor(
-    private ingredientService: IngredientService,
+    private productService: ProductService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {
-    this.showImage = JSON.parse(
-      this.route.snapshot.queryParamMap?.get('showImage') ?? 'false'
-    );
     const currentPage = +(this.route.snapshot.queryParamMap.get(
       'currentPage'
     ) as string);
@@ -55,11 +51,11 @@ export class IngredientComponent {
     const queryName$ = (
       this.formGroup.get('queryName')?.valueChanges as Observable<any>
     ).pipe(startWith(queryName), debounceTime(1000));
-    this.ingredients$ = combineLatest([queryName$, this.currentPage$]).pipe(
+    this.products$ = combineLatest([queryName$, this.currentPage$]).pipe(
       concatMap(([queryName, currentPage]) => {
         const offset = 10 * (currentPage - 1);
         return queryName
-          ? this.ingredientService.search(queryName, offset)
+          ? this.productService.search(queryName, offset)
           : EMPTY;
       }),
       catchError((error) => {
@@ -86,10 +82,6 @@ export class IngredientComponent {
     this.searchSubject.next(1);
   }
 
-  imageUrl(imageName: string): string {
-    return `https://spoonacular.com/cdn/ingredients_100x100/${imageName}`;
-  }
-
   maxPagesByTotalItems(totalItems: number): number {
     return Math.ceil(totalItems / this.itemsPerPage);
   }
@@ -106,9 +98,5 @@ export class IngredientComponent {
       this.currentPage += 1;
       this.currentPageSubject.next(this.currentPage);
     }
-  }
-
-  toggleImages(): void {
-    this.showImage = !this.showImage;
   }
 }
