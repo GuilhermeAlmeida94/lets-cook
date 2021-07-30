@@ -32,6 +32,8 @@ export class ProductComponent {
 
   products$: Observable<any> | undefined;
 
+  loading = false;
+
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,

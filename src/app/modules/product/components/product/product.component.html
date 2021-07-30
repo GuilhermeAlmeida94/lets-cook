@@ -38,6 +38,7 @@
           <div class="product__buttons">
             <button
               mat-raised-button
+              color="primary"
               [routerLink]="[
                 '/product/simple',
                 product.id
@@ -48,11 +49,14 @@
             </button>
             <button
               mat-raised-button
+              color="primary"
               [routerLink]="[
                 '/product',                
                 product.id
               ]"
               [queryParams]="{ queryName: formGroup.get('queryName')?.value, currentPage }"
+              [class.spinner]="loading"
+              (click)="loading = true;"
             >
               With Resolver
             </button>
